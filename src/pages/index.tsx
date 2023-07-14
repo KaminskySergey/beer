@@ -1,35 +1,23 @@
+
+"use client"
+
+import useBeer from "@/(store)/store";
 import Layout from "@/components/layout/Layout"
 import HomePage from "@/components/screen/home/Home"
-import { HomeProps } from "@/types/beer.types";
-import { GetServerSideProps } from "next";
-import { FC } from "react";
+import { Beer } from "@/types/beer.types";
+import { FC, useEffect, useState } from "react";
 
-export async function getServerSideProps  ()  {
-    try {
-      const response = await fetch('https://api.punkapi.com/v2/beers?page=1&per_page=15');
-      const data = await response.json();
-  
-      return {
-        props: {
-          data,
-        },
-      };
-    } catch (error) {
-      console.error('Error fetching data:', error);
-  
-      return {
-        props: {
-          data: null,
-        },
-      };
-    }
-  }
 
- const Home: FC<HomeProps> = ({data = []}) => {
-    console.log(data)
+ const Home: FC = () => {
+  const [allBeer, setAllBeer] = useState<Beer[]>()
+    const {fetchBeer, beer} = useBeer()
+    
+    useEffect(() => {
+      setAllBeer(beer)
+    }, [beer])
 return (
     <Layout>
-        <HomePage />
+        <HomePage allBeer={allBeer}/>
     </Layout>
 )
 }
