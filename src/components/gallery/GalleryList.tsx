@@ -30,33 +30,34 @@ useEffect(() => {
 
 
 useEffect(() => {
+  const handleScroll = () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      setCurrentPage((prevPage) => {
+        const nextPage = prevPage + 1;
+        layzyLoadBeer(nextPage);
+        return nextPage;
+      });
+    } 
+    
+    
+  };
   window.addEventListener('scroll', handleScroll);
   
   return () => {
     window.removeEventListener('scroll', handleScroll);
   };
-}, []); 
+}, [layzyLoadBeer]); 
 
-const handleScroll = () => {
-  const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-  if (scrollTop + clientHeight >= scrollHeight) {
-    setCurrentPage((prevPage) => {
-      const nextPage = prevPage + 1;
-      layzyLoadBeer(nextPage);
-      return nextPage;
-    });
-  } 
-  
-  
-};
+
 
 const handleClick = (el: Beer) => {
   beerInfo(el)
 router.push(`/beer/${el.id}`)
 }
 
-const toggleRightClick = (e: MouseEvent, beerId: string) => {
-  e.preventDefault(); // Отменить стандартное контекстное меню
+const toggleRightClick = (e: React.MouseEvent<HTMLLIElement, MouseEvent>, beerId: string) => {
+  e.preventDefault(); 
   toggleBeerCards(beerId)
 };
 

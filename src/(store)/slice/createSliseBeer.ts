@@ -45,15 +45,15 @@ export const createSliceBeer: StateCreator<BeerSlice> = (set) => ({
   },
   toggleBeerCards: async (beerId: string) => {
     set((state) => {
-      const selectedProduct = state.beer.find((beer) => beer.id === beerId);
+      const selectedProduct = state.beer.find((beer) => beer.id.toString() === beerId.toString());
 
       if (selectedProduct) {
-        const isProductSelected = state.selectedBeers.some((beer) => beer.id === beerId);
+        const isProductSelected = state.selectedBeers.some((beer) => beer.id.toString() === beerId.toString());
 
         if (isProductSelected) {
           return {
             ...state,
-            selectedBeers: state.selectedBeers.filter((beer) => beer.id !== beerId),
+            selectedBeers: state.selectedBeers.filter((beer) => beer.id.toString() !== beerId.toString()),
           };
         }
 
@@ -66,7 +66,7 @@ export const createSliceBeer: StateCreator<BeerSlice> = (set) => ({
       return state;
     });
   },
-  deleteBeers: () => {
+  deleteBeers: async () => {
     set((state) => {
       const updatedBeer = state.beer.filter(
         (beer) => !state.selectedBeers.find((selectedBeer) => selectedBeer.id === beer.id)

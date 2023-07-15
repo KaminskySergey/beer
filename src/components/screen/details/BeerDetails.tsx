@@ -3,8 +3,8 @@ import styles from "./BeerDetails.module.css"
 import Image from "next/image"
 import { FC, useEffect, useState } from "react"
 import { Beer } from "@/types/beer.types"
-const BeerDetails: FC <Beer>= () => {
-    const {currentBeer } = useBeer()
+const BeerDetails: FC= () => {
+  const { currentBeer }: { currentBeer?: any } = useBeer();
     
     return (
 <div className={styles.container}>

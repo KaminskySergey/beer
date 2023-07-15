@@ -17,7 +17,10 @@ const Layout: FC<PropsWithChildren<unknown>> = ({children}) => {
         {router.pathname === '/beer' ? 
         <Link href={'/'} style={{backgroundColor: 'yellow', padding: '10px', borderRadius: '8px'}}>
             Home
-        </Link> : ''    
+        </Link> : 
+        <Link href={'/beer'} style={{backgroundColor: 'green', padding: '10px', borderRadius: '8px'}}>
+        Back
+    </Link>
     }
     {lengthSelected === 0 ? '' :  <button onClick={handleDeleteSelected} style={{marginLeft: 'auto', backgroundColor: 'red', color: 'black'}} type="button">{`Delete ${lengthSelected} element`}</button>}
         </header>
