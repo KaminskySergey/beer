@@ -1,7 +1,10 @@
 import useBeer from "@/(store)/store";
-import { IBeers } from "@/types/beer.types";
+import { Beer, IBeers } from "@/types/beer.types";
 import Image from "next/image";
 import { FC, PropsWithChildren, useEffect, useRef, useState } from "react";
+
+import styles from './GalleryList.module.css';
+import { useRouter } from "next/router";
 
 type IGallyryProps = {
     allBeer: IBeers['allBeer']
@@ -12,7 +15,8 @@ const GalleryList: FC <PropsWithChildren<unknown>> = ({children}) => {
   const containerRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(1)
   const [allBeer, setAllBeer] = useState<object>([])
-    const {fetchBeer, layzyLoadBeer, beer, page} = useBeer();
+    const {fetchBeer, layzyLoadBeer, beerInfo, toggleBeerCards, beer, selectedBeers} = useBeer();
+    const router = useRouter()
 
     useEffect(() => {
       fetchBeer();
@@ -20,9 +24,11 @@ const GalleryList: FC <PropsWithChildren<unknown>> = ({children}) => {
 
 useEffect(() => {
     setAllBeer(beer)
+    
 }, [beer])
-console.log(allBeer)
   
+
+
 useEffect(() => {
   window.addEventListener('scroll', handleScroll);
   
@@ -39,47 +45,41 @@ const handleScroll = () => {
       layzyLoadBeer(nextPage);
       return nextPage;
     });
-  }
+  } 
+  
+  
 };
-console.log(beer, '333')
-console.log(page, '444')
+
+const handleClick = (el: Beer) => {
+  beerInfo(el)
+router.push(`/beer/${el.id}`)
+}
+
+const toggleRightClick = (e: MouseEvent, beerId: string) => {
+  e.preventDefault(); // Отменить стандартное контекстное меню
+  toggleBeerCards(beerId)
+};
+
+console.log(allBeer, 'selectedProductsselectedProductsselectedProducts')
     return (
-        <div >
-            {
-                allBeer?.map(el => (
-                    <div key={el.id}>
-                        {/* <Image src={beer.image_url} width={100} height={120} alt={beer.name} className="beer-image" /> */}
-      <div className="beer-details">
-        <h2 className="beer-name">{el.name}</h2>
-        <p className="beer-tagline">{el.tagline}</p>
-        <div className="beer-description">{el.description}</div>
-        <div className="beer-info">
-          <div className="beer-info-item">
-            <span className="label">ABV:</span> {el.abv}%
-          </div>
-          <div className="beer-info-item">
-            <span className="label">IBU:</span> {el.ibu}
-          </div>
-          <div className="beer-info-item">
-            <span className="label">EBC:</span> {el.ebc}
-          </div>
-          <div className="beer-info-item">
-            <span className="label">pH:</span> {el.ph}
-          </div>
+      <>
+      <ul className={styles['list']}>
+  {Array.isArray(allBeer) &&
+    allBeer?.map((el) => (
+      <li key={el.id} style={{backgroundColor: selectedBeers.find(item => item.id === el.id ) ? 'orange' : ''}} className={styles['item-card']} onContextMenu={(e) => toggleRightClick(e, el.id)}>
+        <div className={styles['cont-img']}>
+          <Image width={100} height={120}  src={el.image_url} alt={el.name} />
         </div>
-        <div className="food-pairing">
-          <span className="label">Food Pairing:</span>
-          <ul>
-            {el.food_pairing.map((food, index) => (
-              <li key={index}>{food}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-                    </div>
-                ))
-            }
-        </div>
+          
+            <h2>{el.name}</h2>
+            <button className={styles['button']} onClick={() => handleClick(el)}>Подробнее</button>
+          
+        
+      </li>
+    ))}
+</ul>
+
+      </>
     )
 }
 

@@ -1,40 +1,37 @@
-.beer-card {
-    display: flex;
-    align-items: center;
-    padding: 16px;
-    background-color: #f2f2f2;
-    border-radius: 8px;
-  }
-  
-  .beer-image {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    margin-right: 16px;
-  }
-  
-  .beer-name {
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  
-  .beer-tagline {
-    font-size: 16px;
-    margin-bottom: 8px;
-  }
-  
-  .beer-description {
-    margin-bottom: 16px;
-  }
-  
-  .beer-info-item {
-    margin-right: 16px;
-  }
-  
-  .food-pairing {
-    margin-top: 16px;
-  }
-  
-  .label {
-    font-weight: bold;
-  }
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+   gap: 20px;
+   padding: 16px;
+}
+.item-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  outline: 2px solid blue;
+  list-style-type: none;
+  padding: 10px;
+}
+
+.cont-img{
+  outline: 2px solid yellow;
+  border-radius: 8px;
+}
+
+.button {
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  border-radius: 8px;
+  background-color: blueviolet;
+  transition: all 250ms;
+}
+.button:hover, .button:focus {
+background-color: aqua;
+}
+
+.highlighted {
+  background-color: yellow;
+}

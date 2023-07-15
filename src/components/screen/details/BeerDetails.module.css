@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .imageContainer {
+    flex: 0 0 300px;
+  }
+  
+  .image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .details {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .name {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .tagline {
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    margin-bottom: 20px;
+  }
+  
+  .info {
+    margin-bottom: 20px;
+  }
+  
+  .info p {
+    margin-bottom: 5px;
+  }
+  
+  .foodPairing {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .foodPairing li {
+    margin-bottom: 5px;
+  }
+  

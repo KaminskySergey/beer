@@ -2,38 +2,38 @@
   export interface Beer {
     abv: number;
     attenuation_level: number;
-    boil_volume: {
+    boil_volume?: {
       unit: string;
       value: number;
     };
-    brewers_tips: string;
-    contributed_by: string;
+    brewers_tips?: string;
+    contributed_by?: string;
     description: string;
-    ebc: number;
-    first_brewed: string;
-    food_pairing: string[];
-    ibu: number;
+    ebc?: number;
+    first_brewed: object;
+    food_pairing?: string[];
+    ibu?: number;
     id: number;
     image_url: string;
-    ingredients: {
-      hops: {
+    ingredients?: {
+      hops?: {
         // Specify the properties of the hops object
       }[];
-      malt: {
+      malt?: {
         // Specify the properties of the malt object
       }[];
-      yeast: string;
+      yeast?: string;
     };
-    method: {
-      fermentation: {
-        temp: {
+    method?: {
+      fermentation?: {
+        temp?: {
           // Specify the properties of the temp object
         };
       };
-      mash_temp: {
+      mash_temp?: {
         // Specify the properties of the mash_temp object
       }[];
-      twist: null;
+      twist?: null;
     };
     name: string;
     ph: number;
@@ -51,7 +51,13 @@
   export interface BeerSlice {
     beer: Beer[];
     page: number;
+    currentBeer: object;
+    selectedBeers: Beer[];
     fetchBeer: () => Promise<void>;
+    layzyLoadBeer: (page: number) => Promise<void> 
+    beerInfo: (el: object) => Promise<void> 
+    toggleBeerCards: (beerId: string) => Promise<void> 
+    deleteBeers: () => Promise<void> 
   }
 
   export type IBeers = {

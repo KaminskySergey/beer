@@ -1,0 +1,16 @@
+import useBeer from "@/(store)/store";
+import Layout from "@/components/layout/Layout"
+import BeerDetails from "@/components/screen/details/BeerDetails";
+import { useRouter } from "next/router";
+
+
+const BeerDetailsPage = () => {
+
+    return (
+        <Layout>
+            <BeerDetails />
+        </Layout>
+    )
+}
+
+export default BeerDetailsPage
