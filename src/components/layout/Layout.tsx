@@ -24,7 +24,7 @@ const Layout: FC<PropsWithChildren<unknown>> = ({children}) => {
     }
     {lengthSelected === 0 ? '' :  <button onClick={handleDeleteSelected} style={{marginLeft: 'auto', backgroundColor: 'red', color: 'black'}} type="button">{`Delete ${lengthSelected} element`}</button>}
         </header>
-        <main style={{width: '1200px', height: 'auto', color: 'white', backgroundColor: '#000', margin: '0 auto', paddingTop: '64px', borderRadius: '40px', opacity: '0.9'}}>
+        <main style={{width: '1200px', minHeight: '850px', color: 'white', backgroundColor: '#000', margin: '0 auto', padding: '64px 16px 32px 16px',  borderRadius: '40px', opacity: '0.9'}}>
             {children}
         </main>
         

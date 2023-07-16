@@ -2,6 +2,7 @@ import axios from "axios";
 import { StateCreator } from "zustand";
 import { BeerSlice, Beer } from "@/types/beer.types";
 
+
 export const createSliceBeer: StateCreator<BeerSlice> = (set) => ({
   beer: [] as Beer[],
   page: 1,
@@ -19,13 +20,15 @@ export const createSliceBeer: StateCreator<BeerSlice> = (set) => ({
     try {
       const { data } = await axios.get(`https://api.punkapi.com/v2/beers?page=${page}&per_page=5`);
       set((state) => {
-        if (state.beer.length + data.length > 15) {
+        if (state.beer.length + data.length > 15 ) {
           const newBeerSlice = state.beer.slice(5);
           return {
             beer: [...newBeerSlice, ...data],
             page: state.page + 1,
           };
         } else {
+          console.log(data, 'data')
+          console.log(state.beer, 'beer')
           return {
             beer: [...state.beer, ...data],
             page: state.page + 1,
@@ -80,3 +83,4 @@ export const createSliceBeer: StateCreator<BeerSlice> = (set) => ({
     });
   },
 });
+

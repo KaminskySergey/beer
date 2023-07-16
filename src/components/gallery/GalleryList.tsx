@@ -11,8 +11,7 @@ type IGallyryProps = {
 }
 
 const GalleryList: FC <PropsWithChildren<unknown>> = ({children}) => {
-  const visibleRecipes = 5;
-  const containerRef = useRef(null);
+  
   const [currentPage, setCurrentPage] = useState(1)
   const [allBeer, setAllBeer] = useState<object>([])
     const {fetchBeer, layzyLoadBeer, beerInfo, toggleBeerCards, beer, selectedBeers} = useBeer();
@@ -67,7 +66,7 @@ console.log(allBeer, 'selectedProductsselectedProductsselectedProducts')
       <ul className={styles['list']}>
   {Array.isArray(allBeer) &&
     allBeer?.map((el) => (
-      <li key={el.id} style={{backgroundColor: selectedBeers.find(item => item.id === el.id ) ? 'orange' : ''}} className={styles['item-card']} onContextMenu={(e) => toggleRightClick(e, el.id)}>
+      <li key={el.id} style={{backgroundColor: selectedBeers.find((item: { id: string; }) => item.id === el.id ) ? 'orange' : ''}} className={styles['item-card']} onContextMenu={(e) => toggleRightClick(e, el.id)}>
         <div className={styles['cont-img']}>
           <Image width={100} height={120}  src={el.image_url} alt={el.name} />
         </div>

@@ -17,21 +17,18 @@
     image_url: string;
     ingredients?: {
       hops?: {
-        // Specify the properties of the hops object
+        
       }[];
       malt?: {
-        // Specify the properties of the malt object
       }[];
       yeast?: string;
     };
     method?: {
       fermentation?: {
         temp?: {
-          // Specify the properties of the temp object
         };
       };
       mash_temp?: {
-        // Specify the properties of the mash_temp object
       }[];
       twist?: null;
     };

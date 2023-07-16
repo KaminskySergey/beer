@@ -5,12 +5,14 @@
   }
   
   .imageContainer {
-    flex: 0 0 300px;
+    width: 150px;
+    height: 300px;
+    outline: 3px solid yellow;
   }
   
   .image {
     width: 100%;
-    height: auto;
+    
   }
   
   .details {
